@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>Paginação JM</title>
+		
+		<style type="text/css">
+         	.ui-widget, .ui-widget .ui-widget {
+             	font-size: 90%;
+         	}
+    	</style>
+	</h:head>
+	<h:body>
+		<ui:insert name="menu">
+			<h:form>
+				<p:menubar>
+					<p:menuitem value="Home" action="index.xhtml?faces-redirect=true" ajax="false" />
+			        <p:submenu label="Clientes">
+		                <p:menuitem value="Listar Sem Paginação" action="#{clienteBeanSemPaginacao.listarSemPaginacao}" ajax="false" />
+		                <p:menuitem value="Listar Com Paginação" action="#{clienteBeanComPaginacao.listarComPaginacao}" ajax="false" />
+			        </p:submenu>
+			    </p:menubar>
+			</h:form>
+		</ui:insert>
+		
+		<ui:insert name="corpo" />
+	</h:body>
+</html>
