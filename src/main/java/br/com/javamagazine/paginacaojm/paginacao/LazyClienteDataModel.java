@@ -39,16 +39,21 @@ public class LazyClienteDataModel extends LazyDataModel<Cliente> {
  
     @Override
     public List<Cliente> load(int primeiroRegistro, int qtdRegistrosPagina, String campoOrdenacao, SortOrder tipoOrdenacao, Map<String, Object> filtros) {
-    	/*
-    	 * Guardo a quantidade de registros retornada passando o possível filtro 
-    	 * aplicado, sem utilizar a ordenação porque não precisa
-    	 */
-    	this.setRowCount(clienteEJB.retornaQuantidadeDeClientes(filtros).intValue());
-    	
-    	/*
-    	 * Retorno a lista de clientes devolvida de acordo com o possível filtro aplicado 
-    	 * e utilizando um eventual critério de ordenação especificado pelo usuário
-    	 */
-    	return listaPaginadaDeClientes = clienteEJB.listaClientesPorDemanda(filtros, campoOrdenacao, tipoOrdenacao, qtdRegistrosPagina, primeiroRegistro);
+    	try {
+    		/*
+	    	 * Guardo a quantidade de registros retornada passando o possível filtro 
+	    	 * aplicado, sem utilizar a ordenação porque não precisa
+	    	 */
+			this.setRowCount(clienteEJB.retornaQuantidadeDeClientes(filtros).intValue());
+	    	
+	    	/*
+	    	 * Retorno a lista de clientes devolvida de acordo com o possível filtro aplicado 
+	    	 * e utilizando um eventual critério de ordenação especificado pelo usuário
+	    	 */
+	    	return listaPaginadaDeClientes = clienteEJB.listaClientesPorDemanda(filtros, campoOrdenacao, tipoOrdenacao, qtdRegistrosPagina, primeiroRegistro);
+    	} catch (NoSuchFieldException|SecurityException e) {
+			e.printStackTrace();
+			return null;
+		}
     }
 }
